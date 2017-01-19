@@ -26,6 +26,7 @@ namespace SQLite_database
             get;set;
         }
 
+        bool _movingToNext = false;
         public override void OnAttach(Activity a)//COMPAT: do one with context as well for API 23
         {
             base.OnAttach(a);
@@ -59,7 +60,7 @@ namespace SQLite_database
         public void goToNext(View view, Bundle savedInstanceState)
         {
 
-            
+            _movingToNext = true;
             //get data entered here
             var NameField = view.FindViewById<EditText>(Resource.Id.ActivityNameField);
             String gotData = NameField.Text;
@@ -90,6 +91,17 @@ namespace SQLite_database
 
             transaction.Add(Resource.Id.RootElement, secondFragment);
             transaction.Commit();*/
+        }
+
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+            if (!_movingToNext)
+            {
+                var viewToShow = this.Activity.FindViewById<LinearLayout>(Resource.Id.ToHide);
+
+                viewToShow.Visibility = ViewStates.Visible;
+            }
         }
     }
 }

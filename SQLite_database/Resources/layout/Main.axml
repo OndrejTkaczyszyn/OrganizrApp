@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:id="@+id/RootElement">
+    android:id="@+id/RootElement"
+    android:background="@color/Background">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:id="@+id/ToHide">
-      <!--<EditText
+    <!--<EditText
             android:hint="Enter your name:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,35 +32,40 @@
         <ListView
             android:minWidth="25px"
             android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tasksList" />
-    
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonLayout">
-        <Button
-            android:text="+"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/buttonAdd" />
-    <!--<Button
+            android:dividerHeight="7dp"
+            android:layout_margin="7dp"
+            android:id="@+id/tasksList" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0"
+            android:id="@+id/buttonLayout"
+            android:layout_margin="7dp">
+            <Button
+                android:text="+"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@color/ListItemBackground"
+                android:id="@+id/buttonAdd" />
+        <!--<Button
             android:text="Edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/buttonEdit" />-->
-    <!--<Button
+        <!--<Button
             android:text="Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/buttonDelete" />-->
-    </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

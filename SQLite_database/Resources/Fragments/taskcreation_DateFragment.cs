@@ -15,9 +15,11 @@ namespace SQLite_database
 {
     public class DateFragment : Fragment
     {
+        public DateTime _workingdate = System.DateTime.MinValue;
+        bool _movingToNext = false;
         public interface OnDatePass
         {
-            void onDatePass(String name);
+            void onDatePass(DateTime datetime);
 
         }
 
@@ -37,12 +39,12 @@ namespace SQLite_database
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            var view = inflater.Inflate(Resource.Layout.fragment_datetime, container, false);//end potentially true
+            var view = inflater.Inflate(Resource.Layout.fragment_date, container, false);//end potentially true
 
-            Button buttonFinish = view.FindViewById<Button>(Resource.Id.ButtonFinish);
+            Button buttonFinish = view.FindViewById<Button>(Resource.Id.ButtonNextThree);
 
             buttonFinish.Click += delegate {
-                endMyMisery(view);
+                goToNext(view,savedInstanceState);
             }; 
                 
 
@@ -57,27 +59,49 @@ namespace SQLite_database
             base.OnCreate(savedInstanceState);
         }
 
-        public void endMyMisery(View view)
+        public void goToNext(View view, Bundle savedInstanceState)
         {
-
-            var DateField = view.FindViewById<EditText>(Resource.Id.ActivityDateField);
-            String gotData = DateField.Text;
+            _movingToNext = true;
+            var DateField = view.FindViewById<CalendarView>(Resource.Id.ActivityDateField);
+            DateField.DateChange += (s,e) =>
+            {
+                int day = e.DayOfMonth;
+                int month = e.Month;
+                int year = e.Year;
+                _workingdate = new System.DateTime(year,month,day);
+                Console.WriteLine("Date:" + day + " / " + month + " / " + year);
+            };
             //work with data entered here
             Console.WriteLine("Got data");
-            Console.WriteLine(gotData);
-            dataPasser.onDatePass(gotData);
+           /* int day = DateField.Date.DayOfMonth;
+            int month = DateField.Date.Month;
+            int year = DateField.Month*/
+
+            dataPasser.onDatePass( _workingdate);
 
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
 
-            transaction.Remove(this);
-            transaction.AddToBackStack("moved back to original");
+            TimeFragment nextFragment = new TimeFragment();
+
+            transaction.Replace(Resource.Id.RootElement,nextFragment);
+            transaction.AddToBackStack("moved to next");
 
             transaction.Commit();
+            nextFragment.OnCreate(savedInstanceState);
 
-            var viewToShow = this.Activity.FindViewById<LinearLayout>(Resource.Id.ToHide);
+        }
 
-            viewToShow.Visibility = ViewStates.Visible;
+        public override void OnDestroyView()
+        {
+            
+            base.OnDestroyView();
+            //TODO: add safeguards for changing the task throughout
+            if (!_movingToNext)
+            {
+                var viewToShow = this.Activity.FindViewById<LinearLayout>(Resource.Id.ToHide);
 
+                viewToShow.Visibility = ViewStates.Visible;
+            }
         }
     }
 }

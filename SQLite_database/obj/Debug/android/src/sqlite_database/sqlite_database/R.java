@@ -14,59 +14,95 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        /** <item name="ListItemTextActive" type="color">#ffeeeeee</item>
+         */
+        public static final int Background=0x7f040007;
+        public static final int BackgroundContrast=0x7f040008;
         public static final int ButtonBackground=0x7f040002;
         public static final int DkGray=0x7f040003;
+        public static final int ListItemBackground=0x7f040005;
+        public static final int ListItemBackgroundActive=0x7f040004;
+        public static final int ListItemText=0x7f040006;
         public static final int TextBackground=0x7f040001;
         public static final int TextBackgroundTint=0x7f040000;
     }
     public static final class drawable {
         public static final int back=0x7f020000;
         public static final int back_textarea=0x7f020001;
-        public static final int icon=0x7f020002;
+        public static final int checkmark=0x7f020002;
+        public static final int clock=0x7f020003;
+        public static final int delete=0x7f020004;
+        public static final int icon=0x7f020005;
     }
     public static final class id {
-        public static final int ActivityDateField=0x7f070007;
-        public static final int ActivityNameField=0x7f07000b;
+        public static final int ActivityChangeShowNameField=0x7f07000d;
+        public static final int ActivityChangeShowTextField=0x7f07000e;
+        public static final int ActivityDateField=0x7f070008;
+        public static final int ActivityEditDateField=0x7f070007;
+        public static final int ActivityEditTimeField=0x7f07001c;
+        public static final int ActivityNameField=0x7f070015;
         public static final int ActivityTextField=0x7f070002;
-        public static final int ButtonFinish=0x7f070008;
-        public static final int ButtonNextOne=0x7f07000d;
+        public static final int ActivityTimeField=0x7f070019;
+        public static final int ButtonDelete=0x7f070011;
+        public static final int ButtonFinish=0x7f07001a;
+        public static final int ButtonNextOne=0x7f070017;
+        public static final int ButtonNextThree=0x7f070009;
         public static final int ButtonNextTwo=0x7f070004;
-        public static final int FirstStepHelper=0x7f07000a;
+        public static final int ButtonSaveEdit=0x7f070013;
+        public static final int ButtonSetReminder=0x7f070012;
+        public static final int ButtonsWrapper=0x7f07000f;
+        public static final int ChangeReminderDateTime=0x7f070010;
+        public static final int DialogButtonEnd=0x7f07001d;
+        public static final int DialogButtonNext=0x7f07000b;
+        public static final int DialogDateHelper=0x7f07000a;
+        public static final int DialogTimeHelper=0x7f07001b;
+        public static final int FirstStepHelper=0x7f070014;
+        public static final int FourthStepHelper=0x7f070018;
         public static final int GoToThree=0x7f070003;
-        public static final int GoToTwo=0x7f07000c;
-        public static final int RootElement=0x7f070015;
+        public static final int GoToTwo=0x7f070016;
+        public static final int ListItemMain=0x7f070022;
+        public static final int RootElement=0x7f070028;
         public static final int SecondStepHelper=0x7f070001;
         public static final int ThirdStepHelper=0x7f070006;
-        public static final int ToHide=0x7f070016;
-        public static final int buttonAdd=0x7f070019;
-        public static final int buttonLayout=0x7f070018;
-        public static final int editLayout=0x7f07000e;
-        public static final int editName=0x7f07000f;
-        public static final int fragmentOneMainLayout=0x7f070009;
+        public static final int ToHide=0x7f070029;
+        public static final int buttonAdd=0x7f07002c;
+        public static final int buttonLayout=0x7f07002b;
+        public static final int editLayout=0x7f07001e;
+        public static final int editName=0x7f07001f;
+        public static final int fragmentOneMainLayout=0x7f07000c;
         public static final int fragmentThreeMainLayout=0x7f070005;
         public static final int fragmentTwoMainLayout=0x7f070000;
-        public static final int linearLayout1=0x7f070011;
-        public static final int tasksList=0x7f070017;
-        public static final int textDate=0x7f070014;
-        public static final int textEditMultiline=0x7f070010;
-        public static final int textName=0x7f070012;
-        public static final int textText=0x7f070013;
+        public static final int linearLayout1=0x7f070021;
+        public static final int reminderLine1=0x7f070026;
+        public static final int reminderLine2=0x7f070027;
+        public static final int tasksList=0x7f07002a;
+        public static final int textDate=0x7f070025;
+        public static final int textEditMultiline=0x7f070020;
+        public static final int textName=0x7f070023;
+        public static final int textText=0x7f070024;
     }
     public static final class layout {
         public static final int fragment_addspecs=0x7f030000;
-        public static final int fragment_datetime=0x7f030001;
-        public static final int fragment_name=0x7f030002;
-        public static final int layout_newnote=0x7f030003;
-        public static final int list_view_data_template=0x7f030004;
-        public static final int main=0x7f030005;
+        public static final int fragment_date=0x7f030001;
+        public static final int fragment_date_dialog=0x7f030002;
+        public static final int fragment_edit=0x7f030003;
+        public static final int fragment_name=0x7f030004;
+        public static final int fragment_time=0x7f030005;
+        public static final int fragment_time_dialog=0x7f030006;
+        public static final int layout_newnote=0x7f030007;
+        public static final int list_view_data_template=0x7f030008;
+        public static final int main=0x7f030009;
     }
     public static final class string {
-        public static final int ActivityDateFieldHint=0x7f060009;
-        public static final int ActivityNameFieldHint=0x7f060007;
-        public static final int ActivityTextFieldHint=0x7f060008;
+        public static final int ActivityDateFieldHint=0x7f06000c;
+        public static final int ActivityNameFieldHint=0x7f06000a;
+        public static final int ActivityTextFieldHint=0x7f06000b;
         public static final int ApplicationName=0x7f060001;
         public static final int ButtonText=0x7f060003;
+        public static final int DialogDateText=0x7f060008;
+        public static final int DialogTimeText=0x7f060009;
         public static final int FirstStepText=0x7f060004;
+        public static final int FourthStepText=0x7f060007;
         public static final int Hello=0x7f060000;
         public static final int SecondStepText=0x7f060005;
         /** LANGUAGE SPECIFIC STRINGS

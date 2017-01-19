@@ -77,18 +77,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Reminder.cs" />
     <Compile Include="Model\Task.cs" />
-    <Compile Include="Resources\DBHelper\DataBase - Copy.cs" />
+    <Compile Include="Resources\DBHelper\DataBasecpy.cs" />
     <Compile Include="Resources\DBHelper\DataBase.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="ListViewAdapter.cs" />
+    <Compile Include="Resources\Fragments\taskcreation_TimeFragment.cs" />
     <Compile Include="Resources\Fragments\taskcreation_DateFragment.cs" />
-    <Compile Include="Resources\Fragments\NameFragment - Copy.cs" />
+    <Compile Include="Resources\Fragments\NameFragmentcpy.cs" />
     <Compile Include="Resources\Fragments\taskcreaetion_NameFragment.cs" />
     <Compile Include="Resources\Fragments\taskcreation_TextFragment.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Resources\Fragments\taskedit_BaseFragment.cs" />
+    <Compile Include="Resources\Fragments\taskedit_ReminderTimeDialog.cs" />
+    <Compile Include="Resources\Fragments\taskedit_ReminderDateDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
   </ItemGroup>
@@ -105,7 +110,17 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_name.axml" />
     <AndroidResource Include="Resources\layout\fragment_addspecs.axml" />
-    <AndroidResource Include="Resources\layout\fragment_datetime.axml" />
+    <AndroidResource Include="Resources\layout\fragment_date.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_edit.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_time.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_date_dialog.axml" />
+    <AndroidResource Include="Resources\layout\fragment_time_dialog.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -139,6 +154,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_textarea.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />

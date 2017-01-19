@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@android:color/white"
+    android:background="@color/Background"
     android:id="@+id/fragmentThreeMainLayout">
     <TextView
         android:layout_width="wrap_content"
@@ -14,29 +14,33 @@
         android:text="@string/ThirdStepText"
         android:id="@+id/ThirdStepHelper"
         android:textColor="@color/DkGray"
-        android:layout_above="@+id/ActivityDateField"
+        android:layout_above="@+id/ActivityEditDateField"
         android:layout_marginBottom="40dp" />
-    <EditText
-        android:inputType="textMultiLine"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+  <CalendarView
+      android:id="@+id/ActivityDateField"
+      android:layout_width="match_parent"
+      android:layout_height="350.0dp"
+      android:layout_centerVertical="true"
+      android:layout_centerHorizontal="true"
+      android:background="@color/BackgroundContrast"/>
+  <!--   android:layout_above="@id/ActivityTimeField" />
+    <TimePicker
+        android:id="@+id/ActivityDateField"
+        android:layout_width="match_parent"
+        android:layout_height="150.0dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:minHeight="20dp"
-        android:minWidth="15dp"
-        android:id="@+id/ActivityDateField"
-        android:hint="@string/ActivityDateFieldHint"
-        android:backgroundTint="@color/TextBackgroundTint"
-        android:background="@android:color/white"
-        android:textColor="@color/DkGray" />
-  <Button
-        android:text="Finish"
+        android:background="@color/BackgroundContrast"
+        android:layout_above="@id/ActivityTimeField" />
+        TODO:Create own timepicker for one line, or make two things for it
+        -->
+    <Button
+        android:text="Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:background="@color/ButtonBackground"
         android:textColor="@color/DkGray"
-        android:id="@+id/ButtonFinish"/>
+        android:id="@+id/ButtonNextThree" />
 </RelativeLayout>

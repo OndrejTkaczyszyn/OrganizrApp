@@ -123,5 +123,47 @@ namespace SQLite_database.Resources.DBHelper
             }
         }
 
+        public List<Task> queryTableTask(int Id)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "Tasks.db")))
+                {
+                    List<Task> taskList = connection.Query<Task>("SELECT * FROM Task Where Id=?", Id);
+                    return taskList;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+
+        public Task queryTaskById(int Id)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "Tasks.db")))
+                {
+                    List<Task> taskList = connection.Query<Task>("SELECT * FROM Task Where Id=?", Id);
+                    if (taskList.Count > 0)
+                    {
+                        return taskList[0];
+                    }
+                    else{
+                        return null;
+                        Log.Info("NO TASK FOUND","yup");
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+
+        }
+
     }
 }

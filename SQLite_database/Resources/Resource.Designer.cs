@@ -60,11 +60,26 @@ namespace SQLite_database
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f040007
+			public const int Background = 2130968583;
+			
+			// aapt resource value: 0x7f040008
+			public const int BackgroundContrast = 2130968584;
+			
 			// aapt resource value: 0x7f040002
 			public const int ButtonBackground = 2130968578;
 			
 			// aapt resource value: 0x7f040003
 			public const int DkGray = 2130968579;
+			
+			// aapt resource value: 0x7f040005
+			public const int ListItemBackground = 2130968581;
+			
+			// aapt resource value: 0x7f040004
+			public const int ListItemBackgroundActive = 2130968580;
+			
+			// aapt resource value: 0x7f040006
+			public const int ListItemText = 2130968582;
 			
 			// aapt resource value: 0x7f040001
 			public const int TextBackground = 2130968577;
@@ -92,7 +107,16 @@ namespace SQLite_database
 			public const int back_textarea = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Icon = 2130837506;
+			public const int Checkmark = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int Clock = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int Delete = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Icon = 2130837509;
 			
 			static Drawable()
 			{
@@ -107,35 +131,86 @@ namespace SQLite_database
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070007
-			public const int ActivityDateField = 2131165191;
+			// aapt resource value: 0x7f07000d
+			public const int ActivityChangeShowNameField = 2131165197;
 			
-			// aapt resource value: 0x7f07000b
-			public const int ActivityNameField = 2131165195;
+			// aapt resource value: 0x7f07000e
+			public const int ActivityChangeShowTextField = 2131165198;
+			
+			// aapt resource value: 0x7f070008
+			public const int ActivityDateField = 2131165192;
+			
+			// aapt resource value: 0x7f070007
+			public const int ActivityEditDateField = 2131165191;
+			
+			// aapt resource value: 0x7f07001c
+			public const int ActivityEditTimeField = 2131165212;
+			
+			// aapt resource value: 0x7f070015
+			public const int ActivityNameField = 2131165205;
 			
 			// aapt resource value: 0x7f070002
 			public const int ActivityTextField = 2131165186;
 			
-			// aapt resource value: 0x7f070008
-			public const int ButtonFinish = 2131165192;
+			// aapt resource value: 0x7f070019
+			public const int ActivityTimeField = 2131165209;
 			
-			// aapt resource value: 0x7f07000d
-			public const int ButtonNextOne = 2131165197;
+			// aapt resource value: 0x7f070011
+			public const int ButtonDelete = 2131165201;
+			
+			// aapt resource value: 0x7f07001a
+			public const int ButtonFinish = 2131165210;
+			
+			// aapt resource value: 0x7f070017
+			public const int ButtonNextOne = 2131165207;
+			
+			// aapt resource value: 0x7f070009
+			public const int ButtonNextThree = 2131165193;
 			
 			// aapt resource value: 0x7f070004
 			public const int ButtonNextTwo = 2131165188;
 			
+			// aapt resource value: 0x7f070013
+			public const int ButtonSaveEdit = 2131165203;
+			
+			// aapt resource value: 0x7f070012
+			public const int ButtonSetReminder = 2131165202;
+			
+			// aapt resource value: 0x7f07000f
+			public const int ButtonsWrapper = 2131165199;
+			
+			// aapt resource value: 0x7f070010
+			public const int ChangeReminderDateTime = 2131165200;
+			
+			// aapt resource value: 0x7f07001d
+			public const int DialogButtonEnd = 2131165213;
+			
+			// aapt resource value: 0x7f07000b
+			public const int DialogButtonNext = 2131165195;
+			
 			// aapt resource value: 0x7f07000a
-			public const int FirstStepHelper = 2131165194;
+			public const int DialogDateHelper = 2131165194;
+			
+			// aapt resource value: 0x7f07001b
+			public const int DialogTimeHelper = 2131165211;
+			
+			// aapt resource value: 0x7f070014
+			public const int FirstStepHelper = 2131165204;
+			
+			// aapt resource value: 0x7f070018
+			public const int FourthStepHelper = 2131165208;
 			
 			// aapt resource value: 0x7f070003
 			public const int GoToThree = 2131165187;
 			
-			// aapt resource value: 0x7f07000c
-			public const int GoToTwo = 2131165196;
+			// aapt resource value: 0x7f070016
+			public const int GoToTwo = 2131165206;
 			
-			// aapt resource value: 0x7f070015
-			public const int RootElement = 2131165205;
+			// aapt resource value: 0x7f070022
+			public const int ListItemMain = 2131165218;
+			
+			// aapt resource value: 0x7f070028
+			public const int RootElement = 2131165224;
 			
 			// aapt resource value: 0x7f070001
 			public const int SecondStepHelper = 2131165185;
@@ -143,23 +218,23 @@ namespace SQLite_database
 			// aapt resource value: 0x7f070006
 			public const int ThirdStepHelper = 2131165190;
 			
-			// aapt resource value: 0x7f070016
-			public const int ToHide = 2131165206;
+			// aapt resource value: 0x7f070029
+			public const int ToHide = 2131165225;
 			
-			// aapt resource value: 0x7f070019
-			public const int buttonAdd = 2131165209;
+			// aapt resource value: 0x7f07002c
+			public const int buttonAdd = 2131165228;
 			
-			// aapt resource value: 0x7f070018
-			public const int buttonLayout = 2131165208;
+			// aapt resource value: 0x7f07002b
+			public const int buttonLayout = 2131165227;
 			
-			// aapt resource value: 0x7f07000e
-			public const int editLayout = 2131165198;
+			// aapt resource value: 0x7f07001e
+			public const int editLayout = 2131165214;
 			
-			// aapt resource value: 0x7f07000f
-			public const int editName = 2131165199;
+			// aapt resource value: 0x7f07001f
+			public const int editName = 2131165215;
 			
-			// aapt resource value: 0x7f070009
-			public const int fragmentOneMainLayout = 2131165193;
+			// aapt resource value: 0x7f07000c
+			public const int fragmentOneMainLayout = 2131165196;
 			
 			// aapt resource value: 0x7f070005
 			public const int fragmentThreeMainLayout = 2131165189;
@@ -167,23 +242,29 @@ namespace SQLite_database
 			// aapt resource value: 0x7f070000
 			public const int fragmentTwoMainLayout = 2131165184;
 			
-			// aapt resource value: 0x7f070011
-			public const int linearLayout1 = 2131165201;
+			// aapt resource value: 0x7f070021
+			public const int linearLayout1 = 2131165217;
 			
-			// aapt resource value: 0x7f070017
-			public const int tasksList = 2131165207;
+			// aapt resource value: 0x7f070026
+			public const int reminderLine1 = 2131165222;
 			
-			// aapt resource value: 0x7f070014
-			public const int textDate = 2131165204;
+			// aapt resource value: 0x7f070027
+			public const int reminderLine2 = 2131165223;
 			
-			// aapt resource value: 0x7f070010
-			public const int textEditMultiline = 2131165200;
+			// aapt resource value: 0x7f07002a
+			public const int tasksList = 2131165226;
 			
-			// aapt resource value: 0x7f070012
-			public const int textName = 2131165202;
+			// aapt resource value: 0x7f070025
+			public const int textDate = 2131165221;
 			
-			// aapt resource value: 0x7f070013
-			public const int textText = 2131165203;
+			// aapt resource value: 0x7f070020
+			public const int textEditMultiline = 2131165216;
+			
+			// aapt resource value: 0x7f070023
+			public const int textName = 2131165219;
+			
+			// aapt resource value: 0x7f070024
+			public const int textText = 2131165220;
 			
 			static Id()
 			{
@@ -202,19 +283,31 @@ namespace SQLite_database
 			public const int fragment_addspecs = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int fragment_datetime = 2130903041;
+			public const int fragment_date = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int fragment_name = 2130903042;
+			public const int fragment_date_dialog = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int layout_newnote = 2130903043;
+			public const int fragment_edit = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int list_view_data_template = 2130903044;
+			public const int fragment_name = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Main = 2130903045;
+			public const int fragment_time = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int fragment_time_dialog = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int layout_newnote = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int list_view_data_template = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int Main = 2130903049;
 			
 			static Layout()
 			{
@@ -229,14 +322,14 @@ namespace SQLite_database
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060009
-			public const int ActivityDateFieldHint = 2131099657;
+			// aapt resource value: 0x7f06000c
+			public const int ActivityDateFieldHint = 2131099660;
 			
-			// aapt resource value: 0x7f060007
-			public const int ActivityNameFieldHint = 2131099655;
+			// aapt resource value: 0x7f06000a
+			public const int ActivityNameFieldHint = 2131099658;
 			
-			// aapt resource value: 0x7f060008
-			public const int ActivityTextFieldHint = 2131099656;
+			// aapt resource value: 0x7f06000b
+			public const int ActivityTextFieldHint = 2131099659;
 			
 			// aapt resource value: 0x7f060001
 			public const int ApplicationName = 2131099649;
@@ -244,8 +337,17 @@ namespace SQLite_database
 			// aapt resource value: 0x7f060003
 			public const int ButtonText = 2131099651;
 			
+			// aapt resource value: 0x7f060008
+			public const int DialogDateText = 2131099656;
+			
+			// aapt resource value: 0x7f060009
+			public const int DialogTimeText = 2131099657;
+			
 			// aapt resource value: 0x7f060004
 			public const int FirstStepText = 2131099652;
+			
+			// aapt resource value: 0x7f060007
+			public const int FourthStepText = 2131099655;
 			
 			// aapt resource value: 0x7f060000
 			public const int Hello = 2131099648;

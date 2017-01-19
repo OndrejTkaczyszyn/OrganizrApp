@@ -26,7 +26,7 @@ namespace SQLite_database.Model
 
         public string Name { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string Text { get; set; }
     }

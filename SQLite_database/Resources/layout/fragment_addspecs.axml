@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@android:color/white"
+    android:background="@color/Background"
     android:id="@+id/fragmentTwoMainLayout">
     <TextView
         android:layout_width="wrap_content"
@@ -24,6 +24,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:minHeight="20dp"
+        android:minLines="2"
+        android:lines="8"
+        android:maxLines="16"
         android:minWidth="15dp"
         android:id="@+id/ActivityTextField"
         android:hint="@string/ActivityTextFieldHint"

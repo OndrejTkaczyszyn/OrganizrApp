@@ -13,6 +13,7 @@ public class DateFragment
 			"n_onAttach:(Landroid/app/Activity;)V:GetOnAttach_Landroid_app_Activity_Handler\n" +
 			"n_onCreateView:(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;:GetOnCreateView_Landroid_view_LayoutInflater_Landroid_view_ViewGroup_Landroid_os_Bundle_Handler\n" +
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
+			"n_onDestroyView:()V:GetOnDestroyViewHandler\n" +
 			"";
 		mono.android.Runtime.register ("SQLite_database.DateFragment, SQLite_database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", DateFragment.class, __md_methods);
 	}
@@ -48,6 +49,14 @@ public class DateFragment
 	}
 
 	private native void n_onCreate (android.os.Bundle p0);
+
+
+	public void onDestroyView ()
+	{
+		n_onDestroyView ();
+	}
+
+	private native void n_onDestroyView ();
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
