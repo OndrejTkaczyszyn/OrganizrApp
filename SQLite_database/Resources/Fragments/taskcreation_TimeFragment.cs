@@ -15,11 +15,12 @@ namespace SQLite_database
 {
     public class TimeFragment : Fragment
     {
-        public DateTime _workingtime = System.DateTime.MinValue;
+        public int _hour = 0;
+        public int _min = 0;
         bool _movingToNext = false;
         public interface OnTimePass
         {
-            void onTimePass(DateTime time);
+            void onTimePass(int hour, int minute);
 
         }
 
@@ -45,8 +46,15 @@ namespace SQLite_database
 
             buttonFinish.Click += delegate {
                 endMyMisery(view);
-            }; 
-                
+            };
+            var TimeField = view.FindViewById<TimePicker>(Resource.Id.ActivityTimeField);
+            TimeField.TimeChanged += (s, e) =>
+            {
+                _hour = e.HourOfDay;
+                _min = e.Minute;
+
+                Console.WriteLine("Time:" + _hour + " / " + _min);
+            };
 
 
             return view;
@@ -62,21 +70,15 @@ namespace SQLite_database
         public void endMyMisery(View view)
         {
 
-            var TimeField = view.FindViewById<TimePicker>(Resource.Id.ActivityTimeField);
-            TimeField.TimeChanged += (s,e) =>
-            {
-                int hour = e.HourOfDay;
-                int min = e.Minute;
-                _workingtime = new System.DateTime(0, 0, 0, hour, min,0);
-                Console.WriteLine("Time:" + hour + " / " + min);
-            };
+
             //work with data entered here
             Console.WriteLine("Got data");
-           /* int day = DateField.Date.DayOfMonth;
-            int month = DateField.Date.Month;
-            int year = DateField.Month*/
-
-            dataPasser.onTimePass( _workingtime);
+            /* int day = DateField.Date.DayOfMonth;
+             int month = DateField.Date.Month;
+             int year = DateField.Month*/
+            var TimeField = view.FindViewById<TimePicker>(Resource.Id.ActivityTimeField);
+            Console.WriteLine("Time:" + _hour + " / " + _min);
+            dataPasser.onTimePass(_hour,_min);
 
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
 

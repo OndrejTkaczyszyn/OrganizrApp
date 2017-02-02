@@ -18,6 +18,7 @@ namespace SQLite_database
     {
         public DateTime _workingdate = DateTime.MinValue;
         ViewGroup _container;
+        bool dismissed = false;
         public interface OnNewDatePass
         {
             void onNewDatePass(DateTime date, int id);
@@ -27,6 +28,18 @@ namespace SQLite_database
         public OnNewDatePass dataPasser
         {
             get; set;
+        }
+
+        public interface OnDialogFragHide
+        {
+            void onFragmentDismissed();
+        }
+
+        OnDialogFragHide mListener;
+
+        public void setOnFragDismissedListener(OnDialogFragHide listener)
+        {
+            mListener = listener;
         }
 
         public static ReminderDateDialog NewInstance(Bundle bundle)
@@ -87,10 +100,33 @@ namespace SQLite_database
 
         public override void OnDismiss(IDialogInterface dialog)
         {
+
+            if (mListener != null && !dismissed)
+            {
+                dismissed = true;
+                mListener.onFragmentDismissed();
+            }
+            else
+            {
+                Log.Info("sometag", "DialogFragmentDismissed not set");
+            }
             base.OnDismiss(dialog);
             dialog.Dismiss();
         }
 
+        public override void OnCancel(IDialogInterface dialog)
+        {
+            if (mListener != null && dismissed)
+            {
+                dismissed = true;
+                mListener.onFragmentDismissed();
+            }
+            else
+            {
+                Log.Info("sometag", "DialogFragmentDismissed not set");
+            }
+            base.OnCancel(dialog);
+        }
         public void goToNext(View view, Bundle savedInstanceState)
         {
             //get data 

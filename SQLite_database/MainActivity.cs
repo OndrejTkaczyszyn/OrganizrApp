@@ -213,8 +213,7 @@ namespace SQLite_database
         public void onDatePass(DateTime date)
         {
             Console.WriteLine("Got that date:" + date.ToString());
-            //Console.WriteLine("Got that name:" + date.ToString());
-            // FindViewById<TextView>(Resource.Id.dateText).Text = date;
+
 
             //IS END OF PROCESS
             if (_tempTask != null)
@@ -226,9 +225,9 @@ namespace SQLite_database
             }
             
         }
-        public void onTimePass(DateTime time)
+        public void onTimePass(int hour, int min)
         {
-            Console.WriteLine("Got that time:" + time.ToString());
+            Console.WriteLine("Got that time:" + hour + " minutes: " + min);
             //Console.WriteLine("Got that name:" + date.ToString());
             // FindViewById<TextView>(Resource.Id.dateText).Text = date;
 
@@ -236,11 +235,11 @@ namespace SQLite_database
             if (_tempTask != null)
             {
                 DateTime t = _tempTask.Date;
-                DateTime tTempDateTime = new DateTime(t.Year,t.Month,t.Day,time.Hour,time.Minute,0);
+                DateTime tTempDateTime = new DateTime(t.Year,t.Month,t.Day,hour, min,0);
 
 
                 _tempTask.Date = tTempDateTime;
-
+                Console.WriteLine(_tempTask.Date);
                 db.InsertIntoTableTask(_tempTask);
                 LoadData();
                 _tempTask = null;

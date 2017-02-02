@@ -15,7 +15,8 @@ namespace SQLite_database
 {
     public class DateFragment : Fragment
     {
-        public DateTime _workingdate = System.DateTime.MinValue;
+        public int _year, _month,_day;
+        public DateTime _workingdate;
         bool _movingToNext = false;
         public interface OnDatePass
         {
@@ -45,8 +46,19 @@ namespace SQLite_database
 
             buttonFinish.Click += delegate {
                 goToNext(view,savedInstanceState);
-            }; 
-                
+            };
+
+            var DateField = view.FindViewById<CalendarView>(Resource.Id.ActivityDateField);
+            DateField.DateChange += (s, e) =>
+            {
+                _day = e.DayOfMonth;
+                _month = e.Month;
+                _year = e.Year;
+                _month++;
+                Console.WriteLine("Date:" + _day + " / " + _month + " / " + _year);
+                _workingdate = new System.DateTime(_year, _month, _day);
+            };
+
 
 
             return view;
@@ -63,19 +75,8 @@ namespace SQLite_database
         {
             _movingToNext = true;
             var DateField = view.FindViewById<CalendarView>(Resource.Id.ActivityDateField);
-            DateField.DateChange += (s,e) =>
-            {
-                int day = e.DayOfMonth;
-                int month = e.Month;
-                int year = e.Year;
-                _workingdate = new System.DateTime(year,month,day);
-                Console.WriteLine("Date:" + day + " / " + month + " / " + year);
-            };
             //work with data entered here
             Console.WriteLine("Got data");
-           /* int day = DateField.Date.DayOfMonth;
-            int month = DateField.Date.Month;
-            int year = DateField.Month*/
 
             dataPasser.onDatePass( _workingdate);
 
