@@ -67,6 +67,7 @@ public final class R {
         public static final int ToHide=0x7f070029;
         public static final int buttonAdd=0x7f07002c;
         public static final int buttonLayout=0x7f07002b;
+        public static final int buttonStartAlarm=0x7f07002d;
         public static final int editLayout=0x7f07001e;
         public static final int editName=0x7f07001f;
         public static final int fragmentOneMainLayout=0x7f07000c;

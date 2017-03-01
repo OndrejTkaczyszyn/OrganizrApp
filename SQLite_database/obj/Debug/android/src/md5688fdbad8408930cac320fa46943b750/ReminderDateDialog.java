@@ -14,6 +14,7 @@ public class ReminderDateDialog
 			"n_onCreateView:(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;:GetOnCreateView_Landroid_view_LayoutInflater_Landroid_view_ViewGroup_Landroid_os_Bundle_Handler\n" +
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
 			"n_onDismiss:(Landroid/content/DialogInterface;)V:GetOnDismiss_Landroid_content_DialogInterface_Handler\n" +
+			"n_onCancel:(Landroid/content/DialogInterface;)V:GetOnCancel_Landroid_content_DialogInterface_Handler\n" +
 			"";
 		mono.android.Runtime.register ("SQLite_database.ReminderDateDialog, SQLite_database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", ReminderDateDialog.class, __md_methods);
 	}
@@ -57,6 +58,14 @@ public class ReminderDateDialog
 	}
 
 	private native void n_onDismiss (android.content.DialogInterface p0);
+
+
+	public void onCancel (android.content.DialogInterface p0)
+	{
+		n_onCancel (p0);
+	}
+
+	private native void n_onCancel (android.content.DialogInterface p0);
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)

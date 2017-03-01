@@ -17,11 +17,12 @@ namespace SQLite_database
     public class ReminderTimeDialog : DialogFragment
     {
         public DateTime _workingtime = DateTime.MinValue;
-        public int _id;
+        public int _id,_hour,_min;
         ViewGroup _container;
         public interface OnNewTimePass
         {
             void onNewTimePass(DateTime date, int id);
+            void closeTimeDialog(ReminderTimeDialog dialog);
         }
 
         public OnNewTimePass dataPasser
@@ -39,7 +40,7 @@ namespace SQLite_database
         public override void OnAttach(Activity a)//COMPAT: do one with context as well for API 23
         {
             base.OnAttach(a);
-
+            Console.WriteLine("Hello world! I am TimeDialog And I have just been attached");
             dataPasser = (OnNewTimePass)a;
             Console.WriteLine("activity casted to data passer");
         }
@@ -53,10 +54,21 @@ namespace SQLite_database
             Button buttonNext = view.FindViewById<Button>(Resource.Id.DialogButtonEnd);
 
             var TimeField = view.FindViewById<TimePicker>(Resource.Id.ActivityEditTimeField);
-           /* int hour = Arguments.GetInt("hour");
-            int minute = Arguments.GetInt("minute");
-            TimeField.Hour = hour;
-            TimeField.Minute = minute;*/
+             int hour = Arguments.GetInt("hour");
+             int minute = Arguments.GetInt("minute");
+             /*TimeField.Hour = hour;
+             TimeField.Minute = minute;*/
+
+            TimeField.TimeChanged += (s, e) =>
+            {
+                _hour = e.HourOfDay;
+                _min = e.Minute;
+                _workingtime = new System.DateTime(_workingtime.Year, _workingtime.Month, _workingtime.Day, _hour, _min, 0);
+                Console.WriteLine("Time:" + _hour + " / " + _min);
+            };
+
+
+
             buttonNext.Click += delegate {
                 goToNext(view,savedInstanceState);
                /* FragmentTransaction ft = FragmentManager.BeginTransaction();
@@ -70,7 +82,7 @@ namespace SQLite_database
                 ft.AddToBackStack(null);
                 ft.Commit();*/
                 Toast.MakeText(Activity, "Dialog fragment dismissed!", ToastLength.Short).Show();
-                Dialog.Dismiss();
+                //Dismiss();
 
             };
             return view;
@@ -86,8 +98,18 @@ namespace SQLite_database
 
         public override void OnDismiss(IDialogInterface dialog)
         {
+
+            /* if (mListener != null && !dismissed)
+             {
+                 dismissed = true;
+                 mListener.onFragmentDismissed();
+             }
+             else
+             {
+                 Log.Info("sometag", "DialogFragmentDismissed not set");
+             }*/
             base.OnDismiss(dialog);
-            dialog.Dismiss();
+            Console.WriteLine("Time dialog OnDismiss triggered.");
         }
 
 
@@ -95,28 +117,15 @@ namespace SQLite_database
         {
             //get data 
 
-            var TimeField = view.FindViewById<TimePicker>(Resource.Id.ActivityEditTimeField);
-            TimeField.TimeChanged += (s, e) =>
-            {
-                int hour = e.HourOfDay;
-                int min = e.Minute;
-                _workingtime = new System.DateTime(0, 0, 0, hour, min, 0);
-                Console.WriteLine("Time:" + hour + " / " + min);
-            };
-            //work with data entered here
+            
             Console.WriteLine("Got data");
-            /* int day = DateField.Date.DayOfMonth;
-             int month = DateField.Date.Month;
-             int year = DateField.Month*/
+
             int id = Arguments.GetInt("id");
-            //work with data entered here
-            Console.WriteLine("Got data");
-            /* int day = DateField.Date.DayOfMonth;
-             int month = DateField.Date.Month;
-             int year = DateField.Month*/
             _id = Arguments.GetInt("id");
+            Console.WriteLine("Sending nudes: Time: " + _workingtime.Hour + " / " + _workingtime.Minute);
             dataPasser.onNewTimePass(_workingtime, _id);
-            Dialog.Dismiss();
+            dataPasser.closeTimeDialog(this);
+            Console.WriteLine("gotonext -> making dialog fragment disappear.");
         }
     }
 }

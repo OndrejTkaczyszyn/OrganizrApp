@@ -227,6 +227,9 @@ namespace SQLite_database
 			// aapt resource value: 0x7f07002b
 			public const int buttonLayout = 2131165227;
 			
+			// aapt resource value: 0x7f07002d
+			public const int buttonStartAlarm = 2131165229;
+			
 			// aapt resource value: 0x7f07001e
 			public const int editLayout = 2131165214;
 			

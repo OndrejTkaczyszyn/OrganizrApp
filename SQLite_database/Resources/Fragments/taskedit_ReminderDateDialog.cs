@@ -19,10 +19,12 @@ namespace SQLite_database
         public DateTime _workingdate = DateTime.MinValue;
         ViewGroup _container;
         bool dismissed = false;
+        int _day, _month, _year;
         public interface OnNewDatePass
         {
             void onNewDatePass(DateTime date, int id);
             void openTimeDialog(int id, Bundle bundle);
+            void closeDateDialog(ReminderDateDialog dialog);
         }
 
         public OnNewDatePass dataPasser
@@ -52,7 +54,7 @@ namespace SQLite_database
         public override void OnAttach(Activity a)//COMPAT: do one with context as well for API 23
         {
             base.OnAttach(a);
-
+            Console.WriteLine("Hello world! I am DateDialog And I have just been attached");
             dataPasser = (OnNewDatePass)a;
             Console.WriteLine("activity casted to data passer");
         }
@@ -69,23 +71,23 @@ namespace SQLite_database
             int year = Arguments.GetInt("year");
 
             var DateField = view.FindViewById<CalendarView>(Resource.Id.ActivityEditDateField);
-            //DateTime setdate = new DateTime(year,month,day);
-            //DateField.Date = setdate.Ticks;
+           /* DateTime setdate = new DateTime(year,month,day);
+            DateField.Date = setdate.Ticks;//toJavaUnix blablabla*/
+
+            DateField.DateChange += (s, e) =>
+            {
+                _day = e.DayOfMonth;
+                _month = e.Month;
+                _year = e.Year;
+                _workingdate = new System.DateTime(_year, _month, _day);
+                Console.WriteLine("Date:" + _day + " / " + _month + " / " + _year);
+            };
             buttonNext.Click += delegate{
                 
 
                 goToNext(view,savedInstanceState);
-                Toast.MakeText(Activity, "Dialog fragment dismissed!", ToastLength.Short).Show();
-                /*FragmentTransaction ft = FragmentManager.BeginTransaction();
-                //Remove fragment else it will crash as it is already added to backstack
-                Fragment prev = FragmentManager.FindFragmentByTag("dialog");
-                if (prev != null)
-                {
-                    ft.Remove(prev);
-                }
 
-                ft.AddToBackStack(null);*/
-                Dialog.Dismiss();
+
 
             };
             return view;
@@ -101,17 +103,8 @@ namespace SQLite_database
         public override void OnDismiss(IDialogInterface dialog)
         {
 
-            if (mListener != null && !dismissed)
-            {
-                dismissed = true;
-                mListener.onFragmentDismissed();
-            }
-            else
-            {
-                Log.Info("sometag", "DialogFragmentDismissed not set");
-            }
             base.OnDismiss(dialog);
-            dialog.Dismiss();
+            Console.WriteLine("Date dialog OnDismiss triggered.");
         }
 
         public override void OnCancel(IDialogInterface dialog)
@@ -127,28 +120,17 @@ namespace SQLite_database
             }
             base.OnCancel(dialog);
         }
-        public void goToNext(View view, Bundle savedInstanceState)
+         public void goToNext(View view, Bundle savedInstanceState)
         {
-            //get data 
 
-            var DateField = view.FindViewById<CalendarView>(Resource.Id.ActivityEditDateField);
-            DateField.DateChange += (s, e) =>
-            {
-                int day = e.DayOfMonth;
-                int month = e.Month;
-                int year = e.Year;
-                _workingdate = new System.DateTime(year, month, day);
-                Console.WriteLine("Date:" + day + " / " + month + " / " + year);
-            };
-            //work with data entered here
+            
             Console.WriteLine("Got data");
-            /* int day = DateField.Date.DayOfMonth;
-             int month = DateField.Date.Month;
-             int year = DateField.Month*/
             int id = Arguments.GetInt("id");
             dataPasser.onNewDatePass(_workingdate,id);
+            Console.WriteLine("Sending nudes: Time: " + _workingdate.Month + " / " + _workingdate.Day);
             dataPasser.openTimeDialog(id,savedInstanceState);
-
+            dataPasser.closeDateDialog(this);
+            Console.WriteLine("gotonext -> making dialog fragment disappear.");
         }
     }
 }

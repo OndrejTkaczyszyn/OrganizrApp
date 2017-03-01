@@ -22,14 +22,12 @@ namespace SQLite_database
         Button _buttonAdd;
         Task _tempTask;
         DateTime _tempDateTime = DateTime.MinValue;
+        ReminderDateDialog _remdate = null;
+        ReminderTimeDialog _remtime = null;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
-
             SetContentView (Resource.Layout.Main);
-
             //Create database
             db = new DataBase();
             db.createDataBase();
@@ -49,47 +47,17 @@ namespace SQLite_database
 
             //LoadData
             LoadData();
-            //Event
-            /*btnAdd.Click += delegate
+
+            var buttonAlarm = FindViewById<Button>(Resource.Id.buttonStartAlarm);
+
+            buttonAlarm.Click += (object sender, EventArgs eventArgs) => 
             {
-
-                Person person = new Person()
-                {
-                    Name = editName.Text,
-                    Age = int.Parse(editAge.Text),//TODO: handle exception here, or force input only to contain number
-                    Email = editEmail.Text
-                };
-                db.InsertIntoTablePerson(person);
-                LoadData();
+                Console.WriteLine(" DEBUG 30 seconds from now:" + (DateTime.UtcNow.AddSeconds(30)).ToString());
+                Console.WriteLine(" DEBUG Thread time millis:" + Java.Lang.JavaSystem.CurrentTimeMillis().ToString());
+                SetAlarm(sender, eventArgs, "Shits", "Giggles",DateTime.UtcNow.AddSeconds(30));
             };
 
-            btnEdit.Click += delegate {
-
-                Person person = new Person()//TODO: handle exception here as well, apparently
-                {
-                    Id = int.Parse(editName.Tag.ToString()),
-                    Name = editName.Text,
-                    Age = int.Parse(editAge.Text),
-                    Email = editEmail.Text
-                };
-                db.updateTablePerson(person);
-                LoadData();
-            };
-
-            btnDelete.Click += delegate {
-
-                Person person = new Person()
-                {
-                    Id = int.Parse(editName.Tag.ToString()),
-                    Name = editName.Text,
-                    Age = int.Parse(editAge.Text),
-                    Email = editEmail.Text
-                };
-                db.deleteTablePerson(person);
-                LoadData();
-            };*/
-
-            listData.ItemLongClick += (s, e) => //Want to edit task
+            listData.ItemClick += (s, e) => //Want to edit task
             {
                 Log.Info("COUNT:", listData.Count.ToString());
                 int id = (int)e.View.GetTag(Resource.Id.editLayout);
@@ -121,7 +89,7 @@ namespace SQLite_database
 
                 viewToHide.Visibility = ViewStates.Gone;
             };
-            listData.ItemClick += (s, e) => {
+            listData.ItemLongClick += (s, e) => {
                 //Set background for selected item
                 Log.Info("COUNT:", listData.Count.ToString());
                 Log.Info("Position:", e.Position.ToString());
@@ -219,15 +187,16 @@ namespace SQLite_database
             if (_tempTask != null)
             {
                 _tempTask.Date = date;
-               /* listSource.Add(_tempTask);
-                _tempTask = null;*/
+                /* listSource.Add(_tempTask);
+                 _tempTask = null;*/
+                
 
             }
             
         }
         public void onTimePass(int hour, int min)
         {
-            Console.WriteLine("Got that time:" + hour + " minutes: " + min);
+            Console.WriteLine("Got that time, hours:" + hour + " minutes: " + min);
             //Console.WriteLine("Got that name:" + date.ToString());
             // FindViewById<TextView>(Resource.Id.dateText).Text = date;
 
@@ -240,6 +209,7 @@ namespace SQLite_database
 
                 _tempTask.Date = tTempDateTime;
                 Console.WriteLine(_tempTask.Date);
+                SetAlarm(null, null, _tempTask.Name, _tempTask.Text, tTempDateTime);
                 db.InsertIntoTableTask(_tempTask);
                 LoadData();
                 _tempTask = null;
@@ -247,7 +217,6 @@ namespace SQLite_database
             }
 
         }
-
         public void onNewTextPass(String text, int id)
         {
             Task tempTask = db.queryTaskById(id);
@@ -282,7 +251,7 @@ namespace SQLite_database
         public void onNewDatePass(DateTime date, int id)
         {
             Console.WriteLine("New date passed");
-
+            Console.WriteLine("Received date; New date: " + date.Day + " / " + date.Month);
             _tempDateTime = date;
 
             
@@ -294,6 +263,7 @@ namespace SQLite_database
 
             DateTime t = _tempDateTime;
             DateTime tTempDateTime = new DateTime(t.Year, t.Month, t.Day, time.Hour, time.Minute, 0);
+            Console.WriteLine("Received time: New time: " + time.Hour + " / " + time.Minute);
             tempTask.Date = tTempDateTime;
             db.updateTableTask(tempTask);
             LoadData();
@@ -306,17 +276,37 @@ namespace SQLite_database
             db.deleteTableTask(tempTask);
             LoadData();
         }
-
-        public void openTimeDialog(int id,Bundle bundle) {
+        public void closeTimeDialog(ReminderTimeDialog dialog)
+        {
             FragmentTransaction ft = FragmentManager.BeginTransaction();
-            //Remove fragment else it will crash as it is already added to backstack
-            Fragment prev = FragmentManager.FindFragmentByTag("dialog");
-            if (prev != null)
-            {
-                ft.Remove(prev);
-            }
+            ft.Remove(dialog);
+            ft.AddToBackStack("close-time");
+            //ft.Commit();//added by winffee
+            dialog.Dismiss();
+            _remdate.Dismiss();
 
-            ft.AddToBackStack(null);
+        }
+
+        public void closeDateDialog(ReminderDateDialog dialog)
+        {
+            FragmentTransaction ft = FragmentManager.BeginTransaction();
+            ft.Remove(dialog);
+
+            ft.AddToBackStack("close-time");
+            //ft.Commit();
+            _remdate = dialog;
+            //Also tried i.e. dialog.Dismiss(); here
+        }
+        public void openTimeDialog(int id,Bundle bundle) {
+             FragmentTransaction ft = FragmentManager.BeginTransaction();
+              //Remove fragment else it will crash as it is already added to backstack
+              Fragment prev = FragmentManager.FindFragmentByTag("dialog");
+              if (prev != null)
+              {
+                  ft.Remove(prev);
+              }
+            
+              ft.AddToBackStack("time-dialog");
             // Create and show the dialog.
 
 
@@ -324,22 +314,25 @@ namespace SQLite_database
 
             Task wTask = db.queryTaskById(id);
 
-            int hour = wTask.Date.Hour;
-            int minute = wTask.Date.Minute;
+              int hour = wTask.Date.Hour;
+              int minute = wTask.Date.Minute;
 
-            Bundle taskdata = new Bundle();
-            taskdata.PutInt("id", id);
-            taskdata.PutInt("hour",  hour);
-            taskdata.PutInt("minute", minute);
-
+              Bundle taskdata = new Bundle();
+              taskdata.PutInt("id", id);
+              taskdata.PutInt("hour",  hour);
+              taskdata.PutInt("minute", minute);
+            Console.WriteLine("Opening new time dialog!");
             ReminderTimeDialog timeDialog = ReminderTimeDialog.NewInstance(taskdata);
-            timeDialog.Arguments = taskdata;
-            timeDialog.SetStyle(DialogFragmentStyle.NoTitle, 0);//TODO: Create own theme and style
-            timeDialog.Show(ft, "dialog");
+            _remtime = timeDialog;
+              timeDialog.Arguments = taskdata;
+              timeDialog.SetStyle(DialogFragmentStyle.NoTitle, 0);//TODO: Create own theme and style
+              timeDialog.Show(ft, "dialog");
+            
         }
 
     public void openDateDialog(int id, Bundle bundle)
     {
+            Console.WriteLine("Trying to open new date dialog!");
             FragmentTransaction ft = FragmentManager.BeginTransaction();
             //Remove fragment else it will crash as it is already added to backstack
             Fragment prev = FragmentManager.FindFragmentByTag("dialog");
@@ -348,7 +341,8 @@ namespace SQLite_database
                 ft.Remove(prev);
             }
 
-            ft.AddToBackStack(null);
+            ft.AddToBackStack("date-dialog");
+            
             // Create and show the dialog.
 
 
@@ -366,13 +360,31 @@ namespace SQLite_database
             taskdata.PutInt("day", day);
             taskdata.PutInt("month", month);
             taskdata.PutInt("year", year);
-
+            Console.WriteLine("Opening new date dialog!");
             ReminderDateDialog dateDialog = ReminderDateDialog.NewInstance(taskdata);
+            _remdate = dateDialog;
             dateDialog.Arguments = taskdata;
             dateDialog.SetStyle(DialogFragmentStyle.NoTitle, 0);//TODO: Create own theme and style
             dateDialog.Show(ft, "dialog");
   
         }
+
+        private void SetAlarm(object sender, EventArgs eventArgs, String title, String message, DateTime date)
+        {
+            var alarmIntent = new Intent(this, typeof(AlarmHandling.AlarmReceiver));
+            alarmIntent.PutExtra("title", title);
+            alarmIntent.PutExtra("message", message);
+
+            var pending = PendingIntent.GetBroadcast(this, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
+
+            var alarmManager = (AlarmManager)GetSystemService(AlarmService);
+            //var date = DateTime.UtcNow.AddSeconds(20);
+            Console.WriteLine("Received date/time:" +  date.ToString());
+            Console.WriteLine("Date to milis:" + Utils.DateTimeToUnixMillis(date).ToString());
+            alarmManager.Set(AlarmType.RtcWakeup, Utils.DateTimeToUnixMillis(date),  pending);
+
+        }
+
     }
 }
 

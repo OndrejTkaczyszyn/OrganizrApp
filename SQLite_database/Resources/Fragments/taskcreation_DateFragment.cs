@@ -21,7 +21,6 @@ namespace SQLite_database
         public interface OnDatePass
         {
             void onDatePass(DateTime datetime);
-
         }
 
         public OnDatePass dataPasser
@@ -79,7 +78,6 @@ namespace SQLite_database
             Console.WriteLine("Got data");
 
             dataPasser.onDatePass( _workingdate);
-
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
 
             TimeFragment nextFragment = new TimeFragment();
